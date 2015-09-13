@@ -3,7 +3,8 @@
 
 #include <QColor>
 #include <QVector>
-#include "Box2D.h"
+#include <QObject>
+#include <Box2D/Box2D.h>
 
 class GeneticAlgorithm: public QObject {
     Q_OBJECT

@@ -24,4 +24,3 @@ LIBS += -L$$PWD/lib/ -lBox2D
 INCLUDEPATH += $$PWD/Box2D
 DEPENDPATH += $$PWD/Box2D
 
-PRE_TARGETDEPS += $$PWD/lib/libBox2D.a

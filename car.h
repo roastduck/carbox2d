@@ -2,7 +2,7 @@
 #define CAR_H
 
 #include <QVector>
-#include "Box2D.h"
+#include <Box2D/Box2D.h>
 #include "geneticalgorithm.h"
 
 class Car: public QObject {

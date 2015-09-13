@@ -2,7 +2,8 @@
 #define WORLD_H
 
 #include <QVector>
-#include "Box2D.h"
+#include <QObject>
+#include <Box2D/Box2D.h>
 #include "car.h"
 #include "contactlistener.h"
 #include "geneticalgorithm.h"
