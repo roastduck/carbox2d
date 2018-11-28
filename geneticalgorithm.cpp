@@ -22,7 +22,7 @@ void GeneticAlgorithm::init() {
         for (int j = 0; j < CHROMOS_SIZE; j++) {
             chromos[i][j] = float(qrand())/float(RAND_MAX);
         }
-        unsigned short int  red = qrand()%256;
+        unsigned short int red = qrand()%256;
         unsigned short int green = qrand()%256;
         unsigned short int blue = qrand()%256;
         for (int j = 0; j < 16; j++) {
@@ -31,13 +31,8 @@ void GeneticAlgorithm::init() {
             colors[i][j][BLUE] = blue;
         }
         offspringsCount[i] = 0;
-        callLists[i] = 0;
-        parentsCallLists[i][0] = 0;
-        parentsCallLists[i][1] = 0;
     }
     createCache();
-    currentCar = -1;
-    generationNum = 0;
     mutationRate = 0;
 }
 
@@ -48,12 +43,6 @@ void GeneticAlgorithm::nextCar() {
 }
 
 void GeneticAlgorithm::nextGeneration() {
-    for (int i = 0; i < POP_SIZE; i++) {
-        for (int j = 0; j < 2; j++) {
-            if (parentsCallLists[i][j])
-            emit freeCallListNumber(parentsCallLists[i][j]);
-        }
-    }
     copyChromes();
     int max1 = 0;
     int max2 = 1;
@@ -76,9 +65,9 @@ void GeneticAlgorithm::nextGeneration() {
     maxScore.push_back(scores[max1]);
     avgScore.push_back(total/POP_SIZE);
     copyChrome(max1, 0);
-    setParentCallLists(0,  callLists[max1], 0);
+    setParentCallLists(0, max1);
     copyChrome(max2, 1);
-    setParentCallLists(1,  callLists[max2], 0);
+    setParentCallLists(1, max2);
     int winners[POP_SIZE/2];
     bool queue[POP_SIZE];
     for (int i = 0; i < POP_SIZE; i++) {
@@ -104,7 +93,6 @@ void GeneticAlgorithm::nextGeneration() {
     createCache();
     generationNum++;
     currentCar = 0;
-    callListIndex = 0;
 }
 
 //private
@@ -177,8 +165,8 @@ void GeneticAlgorithm::crossover(const int parentA, const int parentB,
             setColors(parentA, offspringA, parentB, offspringB, i);
         }
     }
-    setParentCallLists(offspringA, callLists[parentA], callLists[parentB]);
-    setParentCallLists(offspringB, callLists[parentB], callLists[parentA]);
+    setParentCallLists(offspringA, parentA, parentB);
+    setParentCallLists(offspringB, parentB, parentA);
 }
 
 int GeneticAlgorithm::getRandomChrome(bool queue[], const int excluding) {

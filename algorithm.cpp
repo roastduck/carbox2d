@@ -10,9 +10,22 @@ Algorithm::Algorithm(int popSize_) : popSize(popSize_) {
 
     maxScore.push_back(0);
     avgScore.push_back(0);
+
+    for (int i = 0; i < popSize; i++) {
+        callLists[i] = 0;
+        parentsCallLists[i][0] = 0;
+        parentsCallLists[i][1] = 0;
+    }
+
+    currentCar = -1;
+    generationNum = 0;
 }
 
 Algorithm::~Algorithm() {
+    for (int i = 0; i < popSize; i++)
+        for (int j = 0; j < 2; j++)
+            if (parentsCallLists[i][j])
+                emit freeCallListNumber(parentsCallLists[i][j]);
     delete[] chromos;
     delete[] colors;
     delete[] scores;
@@ -87,10 +100,22 @@ float Algorithm::getMaxScore(const int index) {
     return maxScore[index];
 }
 
-void Algorithm::setParentCallLists(const int index, const int parentACL,
-                                        const int parentBCL) {
-    parentsCallLists[index][0] = parentACL;
-    parentsCallLists[index][1] = parentBCL;
+void Algorithm::setParentCallLists(const int index, const int parentA, const int parentB) {
+    if (parentsCallLists[index][0])
+        emit freeCallListNumber(parentsCallLists[index][0]);
+    if (parentsCallLists[index][1])
+        emit freeCallListNumber(parentsCallLists[index][1]);
+    parentsCallLists[index][0] = callLists[parentA];
+    parentsCallLists[index][1] = callLists[parentB];
+}
+
+void Algorithm::setParentCallLists(const int index, const int parent) {
+    if (parentsCallLists[index][0])
+        emit freeCallListNumber(parentsCallLists[index][0]);
+    if (parentsCallLists[index][1])
+        emit freeCallListNumber(parentsCallLists[index][1]);
+    parentsCallLists[index][0] = callLists[parent];
+    parentsCallLists[index][1] = 0;
 }
 
 QColor Algorithm::getColor(const int index) {

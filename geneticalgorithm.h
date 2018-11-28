@@ -35,7 +35,6 @@ private:
     float oldChromes[POP_SIZE][CHROMOS_SIZE];
     float cacheMagnitudes[POP_SIZE][8];
     float cacheAngles[POP_SIZE][8];
-    int callListIndex;
     float mutationRate;
     unsigned short int oldColors[POP_SIZE][16][3];
     int offspringsCount[POP_SIZE];

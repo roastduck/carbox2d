@@ -44,12 +44,13 @@ signals:
 
 protected:
     /**
-     * Set parents' call lists of car #`index` to be `parentACL` and `parentBCL`.
-     *
-     * @param parentACL : Call list of Parent A
-     * @param parentBCL : Call list of Parent B
+     * Set parents of car #`index` to be `parentA` and `parentB`.
      */
-    void setParentCallLists(const int index, const int parentACL, const int parentBCL);
+    void setParentCallLists(const int index, const int parentA, const int parentB);
+    /**
+     * Set car #`index` to have only 1 parent
+     */
+    void setParentCallLists(const int index, const int parent);
 
 private:
     QColor getColor(const int index);
@@ -76,6 +77,7 @@ protected:
     QVector<float> avgScore, maxScore;
     float *scores, *times; ///< Array of size popSize. Score and time of each simulation.
 
+private:
     unsigned int *callLists, (*parentsCallLists)[2]; ///< Arrays of size popSize. Call lists are OpenGL handlers
 };
 
