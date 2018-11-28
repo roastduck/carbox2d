@@ -15,7 +15,11 @@ public:
     Algorithm(int popSize_);
     virtual ~Algorithm();
 
+    void nextCar();
+
     // Functions below are used to get car characteristics from the chromosome
+    float getMagnitude(const int index);
+    float getCartAngle(const int index);
     float getAxleAngle(const int index);
     int getWheelOn(const int index);
     float getWheelRadius(const int index);
@@ -43,6 +47,8 @@ signals:
     void freeCallListNumber(unsigned int);
 
 protected:
+    virtual void nextGeneration() = 0; ///< Override this to implement algorithms
+
     /**
      * Set parents of car #`index` to be `parentA` and `parentB`.
      */

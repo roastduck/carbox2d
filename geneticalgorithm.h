@@ -8,23 +8,19 @@ class GeneticAlgorithm: public Algorithm {
 public:
     GeneticAlgorithm() : Algorithm(POP_SIZE) {}
 
-    float getCartAngle(const int index);
-    float getMagnitude(const int index);
     int getOffspringsCount(const int index);
     void init();
-    void nextCar();
 
 private:
     static constexpr int POP_SIZE = 32;
     static constexpr int MAX_MUTATION_RATE = 5.0;
 
-    void nextGeneration();
+    void nextGeneration() override;
 
     bool compareCar(const float scoreA, const float timeA, const int scoreB,
                     const float timeB);
     void copyChrome(const int parent, const int offspring);
     void copyChromes();
-    void createCache();
     void crossover(const int parentA, const int parentB, const int offspringA,
                     const int offspringB);
     int getRandomChrome(bool queue[], const int excluding = -1);
@@ -33,8 +29,6 @@ private:
                     const int offspringB, const int index);
 
     float oldChromes[POP_SIZE][CHROMOS_SIZE];
-    float cacheMagnitudes[POP_SIZE][8];
-    float cacheAngles[POP_SIZE][8];
     float mutationRate;
     unsigned short int oldColors[POP_SIZE][16][3];
     int offspringsCount[POP_SIZE];

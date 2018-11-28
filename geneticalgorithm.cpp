@@ -5,14 +5,6 @@
 
 //public
 
-float GeneticAlgorithm::getCartAngle(const int index) {
-    return cacheAngles[currentCar][index];
-}
-
-float GeneticAlgorithm::getMagnitude(const int index) {
-    return cacheMagnitudes[currentCar][index];
-}
-
 int GeneticAlgorithm::getOffspringsCount(const int index) {
     return offspringsCount[index];
 }
@@ -32,14 +24,7 @@ void GeneticAlgorithm::init() {
         }
         offspringsCount[i] = 0;
     }
-    createCache();
     mutationRate = 0;
-}
-
-void GeneticAlgorithm::nextCar() {
-    currentCar++;
-    if (currentCar >= POP_SIZE)
-        nextGeneration();
 }
 
 void GeneticAlgorithm::nextGeneration() {
@@ -90,7 +75,6 @@ void GeneticAlgorithm::nextGeneration() {
         offspringsCount[parentB]++;
     }
     mutation();
-    createCache();
     generationNum++;
     currentCar = 0;
 }
@@ -126,24 +110,6 @@ void GeneticAlgorithm::copyChromes() {
         for (int j = 0; j < 16; j++) {
             for (int channel = 0; channel < 3; channel++)
             oldColors[i][j][channel] = colors[i][j][channel];
-        }
-    }
-}
-
-void GeneticAlgorithm::createCache() {
-    for (int i = 0; i < POP_SIZE; i++) {
-        float angles[8];
-        float angleSum = 0;
-        for (int j = 0; j < 8; j++) {
-            cacheMagnitudes[i][j] = chromos[i][j*2 + 1]*
-                    (MAX_CART - MIN_CART) + MIN_CART;
-            angles[j] = chromos[i][j*2]*(1 - MIN_ANGLE) + MIN_ANGLE;
-            angleSum += angles[j];
-        }
-        float angle = 0;
-        for (int j = 0; j < 8; j++) {
-            cacheAngles[i][j] = angle + angles[j]/angleSum*M_PI*2;
-            angle = cacheAngles[i][j];
         }
     }
 }

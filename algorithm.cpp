@@ -32,6 +32,29 @@ Algorithm::~Algorithm() {
     delete[] times;
 }
 
+void Algorithm::nextCar() {
+    currentCar++;
+    if (currentCar >= popSize)
+        nextGeneration();
+}
+
+float Algorithm::getMagnitude(const int index) {
+    return chromos[currentCar][index * 2 + 1] * (MAX_CART - MIN_CART) + MIN_CART;
+}
+
+float Algorithm::getCartAngle(const int index) {
+    float angles[8];
+    float angleSum = 0;
+    for (int j = 0; j < 8; j++) {
+        angles[j] = chromos[currentCar][j*2]*(1 - MIN_ANGLE) + MIN_ANGLE;
+        angleSum += angles[j];
+    }
+    float angle = 0;
+    for (int j = 0; j <= index; j++)
+        angle += angles[j] / angleSum * M_PI * 2;
+    return angle;
+}
+
 float Algorithm::getAxleAngle(const int index) {
     return chromos[currentCar][START_WHEELS_GEN + index * 3 + 1] * M_PI * 2;
 }
