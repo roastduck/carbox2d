@@ -1,21 +1,23 @@
-TEMPLATE      = app
-QT  += widgets opengl
-HEADERS       = \
+TEMPLATE = app
+QT += widgets opengl
+HEADERS = \
     world.h \
     track.h \
     mainwindow.h \
     contactlistener.h \
     car.h \
+    algorithm.h \
     geneticalgorithm.h \
     render.h
 
-SOURCES       = \
-                main.cpp \
+SOURCES = \
+    main.cpp \
     world.cpp \
     track.cpp \
     mainwindow.cpp \
     contactlistener.cpp \
     car.cpp \
+    algorithm.cpp \
     geneticalgorithm.cpp \
     render.cpp
 
