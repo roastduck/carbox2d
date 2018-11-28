@@ -16,18 +16,15 @@ private:
 
     bool compareCar(const float scoreA, const float timeA, const int scoreB,
                     const float timeB);
-    void copyChrome(const int parent, const int offspring);
-    void copyChromes();
+    void copyChromo(const int parent, const int offspring);
     void crossover(const int parentA, const int parentB, const int offspringA,
                     const int offspringB);
-    int getRandomChrome(bool queue[], const int excluding = -1);
+    int getRandomChromo(bool queue[], const int excluding = -1);
     void mutation();
     void setColors(const int parentA, const int offspringA, const int  parentB,
                     const int offspringB, const int index);
 
-    float oldChromes[POP_SIZE][CHROMOS_SIZE];
     float mutationRate;
-    unsigned short int oldColors[POP_SIZE][16][3];
 };
 
 #endif // GENETICALGORITHM_H

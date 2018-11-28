@@ -20,7 +20,6 @@ GeneticAlgorithm::GeneticAlgorithm() : Algorithm(POP_SIZE) {
 }
 
 void GeneticAlgorithm::nextGeneration() {
-    copyChromes();
     int max1 = 0;
     int max2 = 1;
     if (compareCar(scores[max2], times[max2], scores[max1], times[max1]))
@@ -41,17 +40,17 @@ void GeneticAlgorithm::nextGeneration() {
         mutationRate = 0;
     maxScore.push_back(scores[max1]);
     avgScore.push_back(total/POP_SIZE);
-    copyChrome(max1, 0);
+    copyChromo(max1, 0);
     setParentCallLists(0, max1);
-    copyChrome(max2, 1);
+    copyChromo(max2, 1);
     setParentCallLists(1, max2);
     int winners[POP_SIZE/2];
     bool queue[POP_SIZE];
     for (int i = 0; i < POP_SIZE; i++)
         queue[i] = true;
     for (int i = 0; i < POP_SIZE/2; i++) {
-        int a = getRandomChrome(queue);
-        int b = getRandomChrome(queue);
+        int a = getRandomChromo(queue);
+        int b = getRandomChromo(queue);
         winners[i] = compareCar(scores[a], times[a], scores[b], times[b])? a: b;
     }
     crossover(winners[0], winners[1], 2, 3);
@@ -59,7 +58,7 @@ void GeneticAlgorithm::nextGeneration() {
         queue[i] = true;
     for (int i = 2; i < POP_SIZE/2; i++) {
         int parentA = winners[i];
-        int parentB = getRandomChrome(queue, parentA);
+        int parentB = getRandomChromo(queue, parentA);
         crossover(parentA, parentB, i*2, i*2 + 1);
     }
     mutation();
@@ -78,25 +77,13 @@ bool GeneticAlgorithm::compareCar(const float scoreA, const float timeA,
     return false;
 }
 
-void GeneticAlgorithm::copyChrome(const int parent, const int offspring) {
+void GeneticAlgorithm::copyChromo(const int parent, const int offspring) {
     for (int j = 0; j < CHROMOS_SIZE; j++) {
-        chromos[offspring][j] = oldChromes[parent][j];
+        chromos[offspring][j] = oldChromos[parent][j];
     }
     for (int j = 0; j < 16; j++) {
         for (int channel = 0; channel < 3; channel++)
         colors[offspring][j][channel] = oldColors[parent][j][channel];
-    }
-}
-
-void GeneticAlgorithm::copyChromes() {
-    for (int i = 0; i < POP_SIZE; i++) {
-        for (int j = 0; j < CHROMOS_SIZE; j++) {
-            oldChromes[i][j] = chromos[i][j];
-        }
-        for (int j = 0; j < 16; j++) {
-            for (int channel = 0; channel < 3; channel++)
-            oldColors[i][j][channel] = colors[i][j][channel];
-        }
     }
 }
 
@@ -108,12 +95,12 @@ void GeneticAlgorithm::crossover(const int parentA, const int parentB,
         qSwap(bend0, bend1);
     for (int i = 0; i < CHROMOS_SIZE; i++) {
         if (i >= bend0 && i  <= bend1) {
-            chromos[offspringA][i] = oldChromes[parentB][i];
-            chromos[offspringB][i] = oldChromes[parentA][i];
+            chromos[offspringA][i] = oldChromos[parentB][i];
+            chromos[offspringB][i] = oldChromos[parentA][i];
             setColors(parentB, offspringA, parentA, offspringB, i);
         } else {
-            chromos[offspringA][i] = oldChromes[parentA][i];
-            chromos[offspringB][i] = oldChromes[parentB][i];
+            chromos[offspringA][i] = oldChromos[parentA][i];
+            chromos[offspringB][i] = oldChromos[parentB][i];
             setColors(parentA, offspringA, parentB, offspringB, i);
         }
     }
@@ -121,7 +108,7 @@ void GeneticAlgorithm::crossover(const int parentA, const int parentB,
     setParentCallLists(offspringB, parentB, parentA);
 }
 
-int GeneticAlgorithm::getRandomChrome(bool queue[], const int excluding) {
+int GeneticAlgorithm::getRandomChromo(bool queue[], const int excluding) {
     int index = qrand()%POP_SIZE;
     while (!queue[index] || index == excluding) {
         index = (index + 1)%POP_SIZE;
@@ -141,7 +128,6 @@ void GeneticAlgorithm::mutation() {
                 }
             }
         }
-
     }
 }
 

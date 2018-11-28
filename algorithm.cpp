@@ -2,7 +2,9 @@
 
 Algorithm::Algorithm(int popSize_) : popSize(popSize_) {
     chromos = new float[popSize][CHROMOS_SIZE];
+    oldChromos = new float[popSize][CHROMOS_SIZE];
     colors = new unsigned short int[popSize][16][3];
+    oldColors = new unsigned short int[popSize][16][3];
     scores = new float[popSize];
     times = new float[popSize];
     offspringsCount = new int[popSize];
@@ -29,7 +31,9 @@ Algorithm::~Algorithm() {
             if (parentsCallLists[i][j])
                 emit freeCallListNumber(parentsCallLists[i][j]);
     delete[] chromos;
+    delete[] oldChromos;
     delete[] colors;
+    delete[] oldColors;
     delete[] scores;
     delete[] times;
     delete[] offspringsCount;
@@ -45,6 +49,12 @@ void Algorithm::nextCar() {
             for (int j = 0; j < 2; j++)
                 if (parentsCallLists[i][j])
                     emit freeCallListNumber(parentsCallLists[i][j]);
+            for (int j = 0; j < CHROMOS_SIZE; j++)
+                oldChromos[i][j] = chromos[i][j];
+            for (int j = 0; j < 16; j++) {
+                for (int channel = 0; channel < 3; channel++)
+                    oldColors[i][j][channel] = colors[i][j][channel];
+            }
         }
         nextGeneration();
     }

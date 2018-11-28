@@ -79,9 +79,9 @@ protected:
     int generationNum; ///< Generation ID
     int currentCar; ///< Car ID in current generation
 
-    float (*chromos)[CHROMOS_SIZE]; ///< Array of size popSize. Chromosome of each car.
-    unsigned short int (*colors)[16][3]; ///< Array of size popSize. Color of each part of the car,
-                                         ///< used to indicate which part is from which parent
+    float (*chromos)[CHROMOS_SIZE], (*oldChromos)[CHROMOS_SIZE]; ///< Arrays of size popSize. Chromosome of each car.
+    unsigned short int (*colors)[16][3], (*oldColors)[16][3]; ///< Array of size popSize. Color of each part of the car,
+                                                              ///< used to indicate which part is from which parent
 
     QVector<float> avgScore, maxScore;
     float *scores, *times; ///< Array of size popSize. Score and time of each simulation.
