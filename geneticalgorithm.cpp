@@ -18,7 +18,7 @@ float GeneticAlgorithm::getAxleAngle(const int index) {
     return chromes[currentCar][START_WHEELS_GEN + index*3 + 1]*M_PI*2;
 }
 
-unsigned int GeneticAlgorithm::getCarCallListNuber() {
+unsigned int GeneticAlgorithm::getCarCallListNumber() {
     for (int i = 0; i < POP_SIZE; i++) {
         for (int j = 0; j < 2; j++)
             if (parentsCallLists[i][j] == callLists[currentCar])
@@ -116,10 +116,10 @@ void GeneticAlgorithm::init() {
 void GeneticAlgorithm::nextCar() {
     currentCar++;
     if (currentCar >= POP_SIZE)
-        nextGenetation();
+        nextGeneration();
 }
 
-void GeneticAlgorithm::nextGenetation() {
+void GeneticAlgorithm::nextGeneration() {
     for (int i = 0; i < POP_SIZE; i++) {
         for (int j = 0; j < 2; j++) {
             if (parentsCallLists[i][j])

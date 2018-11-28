@@ -13,7 +13,7 @@ public:
 
     float getAvgScore(const int index);
     float getAxleAngle(const int index);
-    unsigned int getCarCallListNuber();
+    unsigned int getCarCallListNumber();
     unsigned int getCarParentCallListNumber(const int parent);
     int getCarNum();
     float getCartAngle(const int index);
@@ -29,7 +29,7 @@ public:
     float getWheelRadius(const int index);
     void init();
     void nextCar();
-    void nextGenetation();
+    void nextGeneration();
     void setCarCallList(const unsigned int callListNumber);
     void setScoreAndTime(float score, float time);
 

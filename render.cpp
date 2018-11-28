@@ -27,7 +27,7 @@ void Render::setSpeed(int newSpeed) {
 
 void Render::createCarCallList() {
     GeneticAlgorithm *algorithm = world->getAlgorithm();
-    unsigned int oldCallListNubmer = algorithm->getCarCallListNuber();
+    unsigned int oldCallListNubmer = algorithm->getCarCallListNumber();
     if (oldCallListNubmer)
         glDeleteLists(oldCallListNubmer, 1);
     unsigned int listNubmer = glGenLists(1);
