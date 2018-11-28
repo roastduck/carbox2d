@@ -2,10 +2,22 @@ lib/*
 Box2D*
 *.user
 *~*
-*.swp
-*.o
-/.qmake.stash
-Makefile
 moc_*.h
 moc_*.cpp
+
+# QMake files
+/.qmake.stash
+Makefile
+
+# Object files
+*.o
+
+# Executable
 carbox2d
+
+# Vim files
+*.swp
+
+# Vim YCM files
+.ycm_extra_conf.py
+.ycm_extra_conf.pyc
