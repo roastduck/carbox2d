@@ -31,7 +31,6 @@ private:
     float oldChromes[POP_SIZE][CHROMOS_SIZE];
     float mutationRate;
     unsigned short int oldColors[POP_SIZE][16][3];
-    int offspringsCount[POP_SIZE];
 };
 
 #endif // GENETICALGORITHM_H

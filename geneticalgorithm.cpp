@@ -22,7 +22,6 @@ void GeneticAlgorithm::init() {
             colors[i][j][GREEN] = green;
             colors[i][j][BLUE] = blue;
         }
-        offspringsCount[i] = 0;
     }
     mutationRate = 0;
 }
@@ -55,10 +54,8 @@ void GeneticAlgorithm::nextGeneration() {
     setParentCallLists(1, max2);
     int winners[POP_SIZE/2];
     bool queue[POP_SIZE];
-    for (int i = 0; i < POP_SIZE; i++) {
+    for (int i = 0; i < POP_SIZE; i++)
         queue[i] = true;
-        offspringsCount[i] = 0;
-    }
     for (int i = 0; i < POP_SIZE/2; i++) {
         int a = getRandomChrome(queue);
         int b = getRandomChrome(queue);

@@ -5,6 +5,7 @@ Algorithm::Algorithm(int popSize_) : popSize(popSize_) {
     colors = new unsigned short int[popSize][16][3];
     scores = new float[popSize];
     times = new float[popSize];
+    offspringsCount = new int[popSize];
     callLists = new unsigned int[popSize];
     parentsCallLists = new unsigned int[popSize][2];
 
@@ -12,6 +13,7 @@ Algorithm::Algorithm(int popSize_) : popSize(popSize_) {
     avgScore.push_back(0);
 
     for (int i = 0; i < popSize; i++) {
+        offspringsCount[i] = 0;
         callLists[i] = 0;
         parentsCallLists[i][0] = 0;
         parentsCallLists[i][1] = 0;
@@ -30,12 +32,22 @@ Algorithm::~Algorithm() {
     delete[] colors;
     delete[] scores;
     delete[] times;
+    delete[] offspringsCount;
+    delete[] callLists;
+    delete[] parentsCallLists;
 }
 
 void Algorithm::nextCar() {
     currentCar++;
-    if (currentCar >= popSize)
+    if (currentCar >= popSize) {
+        for (int i = 0; i < popSize; i++) {
+            offspringsCount[i] = 0;
+            for (int j = 0; j < 2; j++)
+                if (parentsCallLists[i][j])
+                    emit freeCallListNumber(parentsCallLists[i][j]);
+        }
         nextGeneration();
+    }
 }
 
 float Algorithm::getMagnitude(const int index) {
@@ -124,19 +136,11 @@ float Algorithm::getMaxScore(const int index) {
 }
 
 void Algorithm::setParentCallLists(const int index, const int parentA, const int parentB) {
-    if (parentsCallLists[index][0])
-        emit freeCallListNumber(parentsCallLists[index][0]);
-    if (parentsCallLists[index][1])
-        emit freeCallListNumber(parentsCallLists[index][1]);
     parentsCallLists[index][0] = callLists[parentA];
     parentsCallLists[index][1] = callLists[parentB];
 }
 
 void Algorithm::setParentCallLists(const int index, const int parent) {
-    if (parentsCallLists[index][0])
-        emit freeCallListNumber(parentsCallLists[index][0]);
-    if (parentsCallLists[index][1])
-        emit freeCallListNumber(parentsCallLists[index][1]);
     parentsCallLists[index][0] = callLists[parent];
     parentsCallLists[index][1] = 0;
 }

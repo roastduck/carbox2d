@@ -83,6 +83,8 @@ protected:
     QVector<float> avgScore, maxScore;
     float *scores, *times; ///< Array of size popSize. Score and time of each simulation.
 
+    int *offspringsCount; ///< Array of size popSize. Number of offsprings of each car
+
 private:
     unsigned int *callLists, (*parentsCallLists)[2]; ///< Arrays of size popSize. Call lists are OpenGL handlers
 };
