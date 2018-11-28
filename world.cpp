@@ -8,7 +8,6 @@ World::World() {
     algorithm = new GeneticAlgorithm();
     connect(algorithm, SIGNAL(freeCallListNumber(uint)),
             SIGNAL(freeCallListNumber(uint)));
-    algorithm->init();
     algorithm->nextCar();
     uptime = 0;
     init();
@@ -32,7 +31,7 @@ void World::addSparksList(const int impulses, const b2Vec2 pos,
     }
 }
 
-GeneticAlgorithm *World::getAlgorithm() {
+Algorithm *World::getAlgorithm() {
     return algorithm;
 }
 

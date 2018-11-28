@@ -19,7 +19,7 @@ public:
 
     void addSparksList(const int impulses, const b2Vec2 pos,
                         const QColor *color);
-    GeneticAlgorithm *getAlgorithm();
+    Algorithm *getAlgorithm();
     Car *getCar();
     b2Vec2 getCenter();
     Track *getTrack();
@@ -52,7 +52,7 @@ private:
     void init();
     void updateSparks();
 
-    GeneticAlgorithm *algorithm;
+    Algorithm *algorithm;
     b2World *b2world;
     Car *car;
     ContactListener *contactListener;

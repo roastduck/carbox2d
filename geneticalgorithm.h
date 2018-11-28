@@ -6,9 +6,7 @@
 class GeneticAlgorithm: public Algorithm {
     Q_OBJECT
 public:
-    GeneticAlgorithm() : Algorithm(POP_SIZE) {}
-
-    void init();
+    GeneticAlgorithm();
 
 private:
     static constexpr int POP_SIZE = 32;

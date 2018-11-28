@@ -26,7 +26,7 @@ void Render::setSpeed(int newSpeed) {
 //slots
 
 void Render::createCarCallList() {
-    GeneticAlgorithm *algorithm = world->getAlgorithm();
+    Algorithm *algorithm = world->getAlgorithm();
     unsigned int oldCallListNubmer = algorithm->getCarCallListNumber();
     if (oldCallListNubmer)
         glDeleteLists(oldCallListNubmer, 1);
@@ -147,7 +147,7 @@ void Render::drawGrid() {
 }
 
 void Render::drawGraph() {
-    GeneticAlgorithm *algorithm = world->getAlgorithm();
+    Algorithm *algorithm = world->getAlgorithm();
     int count = algorithm->getGenerationNum();
     if (!count)
         return;
@@ -266,7 +266,7 @@ void Render::drawTable() {
     renderText(40, y, "Score", font);
     renderText(90, y, "Time", font);
     y += stepY;
-    GeneticAlgorithm *algorithm = world->getAlgorithm();
+    Algorithm *algorithm = world->getAlgorithm();
     for (int i = 0; i < 32; i++) {
         qglColor(Qt::black);
         if (!algorithm->getCarNum() && algorithm->getGenerationNum()) {
@@ -444,7 +444,7 @@ void Render::setBounds(const float nLeft, const float nRight,
 
 
 void Render::updateGraph() {
-    GeneticAlgorithm *algorithm = world->getAlgorithm();
+    Algorithm *algorithm = world->getAlgorithm();
     int count = algorithm->getGenerationNum();
     if (!count)
         return;

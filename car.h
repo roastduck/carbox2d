@@ -3,12 +3,12 @@
 
 #include <QVector>
 #include <Box2D/Box2D.h>
-#include "geneticalgorithm.h"
+#include "algorithm.h"
 
 class Car: public QObject {
     Q_OBJECT
 public:
-    Car(GeneticAlgorithm *pAlghorithm, b2World *world);
+    Car(Algorithm *pAlghorithm, b2World *world);
 
     void breakFixture(const int index);
     void deletePhisicsBody();
@@ -45,7 +45,7 @@ private:
     void createWheels(b2BodyDef &bodyDef);
     void init(b2BodyDef &bodyDef);
 
-    GeneticAlgorithm *algorithm;
+    Algorithm *algorithm;
     b2Body *axle[8];
     b2Fixture *axleFixture[8];
     b2PolygonShape axleShapes[8];

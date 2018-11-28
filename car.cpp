@@ -2,7 +2,7 @@
 
 #include "car.h"
 
-Car::Car(GeneticAlgorithm *pAlghorithm, b2World *world):
+Car::Car(Algorithm *pAlghorithm, b2World *world):
     algorithm (pAlghorithm),
     b2world(world) {
     b2BodyDef bodyDef;

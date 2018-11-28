@@ -3,16 +3,13 @@
 #include "qglobal.h"
 #include "qmath.h"
 
-//public
-
-void GeneticAlgorithm::init() {
+GeneticAlgorithm::GeneticAlgorithm() : Algorithm(POP_SIZE) {
     for (int i = 0; i < POP_SIZE; i++) {
-        for (int j = 0; j < CHROMOS_SIZE; j++) {
-            chromos[i][j] = float(qrand())/float(RAND_MAX);
-        }
-        unsigned short int red = qrand()%256;
-        unsigned short int green = qrand()%256;
-        unsigned short int blue = qrand()%256;
+        for (int j = 0; j < CHROMOS_SIZE; j++)
+            chromos[i][j] = float(qrand()) / RAND_MAX;
+        unsigned short int red = qrand() % 256;
+        unsigned short int green = qrand() % 256;
+        unsigned short int blue = qrand() % 256;
         for (int j = 0; j < 16; j++) {
             colors[i][j][RED] = red;
             colors[i][j][GREEN] = green;
@@ -69,8 +66,6 @@ void GeneticAlgorithm::nextGeneration() {
     generationNum++;
     currentCar = 0;
 }
-
-//private
 
 bool GeneticAlgorithm::compareCar(const float scoreA, const float timeA,
                                 const int scoreB, const float timeB) {
