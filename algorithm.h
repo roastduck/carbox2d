@@ -33,6 +33,8 @@ public:
     unsigned int getCarParentCallListNumber(const int parent);
     void setCarCallList(const unsigned int callListNumber);
 
+    int getOffspringsCount(const int index) { return offspringsCount[index]; }
+
     int getGenerationNum() { return generationNum; }
     int getCarNum() { return currentCar; }
 
@@ -83,9 +85,8 @@ protected:
     QVector<float> avgScore, maxScore;
     float *scores, *times; ///< Array of size popSize. Score and time of each simulation.
 
-    int *offspringsCount; ///< Array of size popSize. Number of offsprings of each car
-
 private:
+    int *offspringsCount; ///< Array of size popSize. Number of offsprings of each car
     unsigned int *callLists, (*parentsCallLists)[2]; ///< Arrays of size popSize. Call lists are OpenGL handlers
 };
 

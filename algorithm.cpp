@@ -138,11 +138,14 @@ float Algorithm::getMaxScore(const int index) {
 void Algorithm::setParentCallLists(const int index, const int parentA, const int parentB) {
     parentsCallLists[index][0] = callLists[parentA];
     parentsCallLists[index][1] = callLists[parentB];
+    offspringsCount[parentA]++;
+    offspringsCount[parentB]++;
 }
 
 void Algorithm::setParentCallLists(const int index, const int parent) {
     parentsCallLists[index][0] = callLists[parent];
     parentsCallLists[index][1] = 0;
+    offspringsCount[parent]++;
 }
 
 QColor Algorithm::getColor(const int index) {

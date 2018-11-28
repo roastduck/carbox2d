@@ -5,10 +5,6 @@
 
 //public
 
-int GeneticAlgorithm::getOffspringsCount(const int index) {
-    return offspringsCount[index];
-}
-
 void GeneticAlgorithm::init() {
     for (int i = 0; i < POP_SIZE; i++) {
         for (int j = 0; j < CHROMOS_SIZE; j++) {
@@ -60,7 +56,6 @@ void GeneticAlgorithm::nextGeneration() {
         int a = getRandomChrome(queue);
         int b = getRandomChrome(queue);
         winners[i] = compareCar(scores[a], times[a], scores[b], times[b])? a: b;
-        offspringsCount[winners[i]]++;
     }
     crossover(winners[0], winners[1], 2, 3);
     for (int i = 0; i < POP_SIZE; i++)
@@ -69,7 +64,6 @@ void GeneticAlgorithm::nextGeneration() {
         int parentA = winners[i];
         int parentB = getRandomChrome(queue, parentA);
         crossover(parentA, parentB, i*2, i*2 + 1);
-        offspringsCount[parentB]++;
     }
     mutation();
     generationNum++;

@@ -8,7 +8,6 @@ class GeneticAlgorithm: public Algorithm {
 public:
     GeneticAlgorithm() : Algorithm(POP_SIZE) {}
 
-    int getOffspringsCount(const int index);
     void init();
 
 private:
