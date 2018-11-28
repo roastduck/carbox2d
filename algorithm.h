@@ -35,6 +35,7 @@ public:
 
     int getOffspringsCount(const int index) { return offspringsCount[index]; }
 
+    int getPopSize() { return popSize; }
     int getGenerationNum() { return generationNum; }
     int getCarNum() { return currentCar; }
 

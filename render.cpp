@@ -267,7 +267,7 @@ void Render::drawTable() {
     renderText(90, y, "Time", font);
     y += stepY;
     Algorithm *algorithm = world->getAlgorithm();
-    for (int i = 0; i < 32; i++) {
+    for (int i = 0; i < algorithm->getPopSize(); i++) {
         qglColor(Qt::black);
         if (!algorithm->getCarNum() && algorithm->getGenerationNum()) {
             switch (algorithm->getOffspringsCount(i)) {
