@@ -50,7 +50,7 @@ void Car::deletePhisicsBody() {
                 b2world->DestroyJoint(spring[i]);
             b2world->DestroyJoint(motor[i]);
             for (b2Fixture *f = axle[i]->GetFixtureList(); f;
-                 f = f->GetNext()) {
+                f = f->GetNext()) {
                 if (f->GetUserData())
                     delete (QColor *)f->GetUserData();
             }
@@ -136,7 +136,7 @@ void Car::update() {
         if (wheelOn[i] >= 0) {
             spring[i]->SetMaxMotorForce(baseSpringForce + 40*baseSpringForce*
                                         qPow(spring[i]->GetJointTranslation(),
-                                             2));
+                                            2));
             spring[i]->SetMotorSpeed(-20*spring[i]->GetJointTranslation());
         }
         if (brokeNum < 7 && breakCartFixture[i]) {
@@ -179,7 +179,7 @@ void Car::update() {
 void Car::updateTorque() {
     float totalMass = carBody->GetMass();
     torque = wheelsCount? totalMass*MASS_MULT*15/qPow(2,float(wheelsCount) - 1):
-                          0;
+                        0;
     for (int i = 0; i < 8; i++) {
         if (wheelOn[i] >= 0) {
             motor[i]->SetMaxMotorTorque(torque);
@@ -210,13 +210,13 @@ void Car::createCart() {
         fixtureDef.restitution = 0.05;
         fixtureDef.filter.groupIndex = -1;
         cartFixture[i] = createFixture(&fixtureDef, carBody,
-                                       algorithm->getColorCart(i));
+                                        algorithm->getColorCart(i));
         setBreakFixture(i, false);
     }
 }
 
 b2Fixture *Car::createFixture(const b2FixtureDef* def, b2Body *body,
-                         const QColor color) {
+                        const QColor color) {
     b2Fixture *fixture = body->CreateFixture(def);
     QColor *c = new QColor(color);
     fixture->SetUserData(c);
@@ -248,17 +248,17 @@ void Car::createWheels(b2BodyDef &bodyDef) {
         fixtureDef.restitution = 0.05;
         fixtureDef.filter.groupIndex = -1;
         axleFixture[i] = createFixture(&fixtureDef, carBody,
-                                       algorithm->getColorAxle(i));
+                                        algorithm->getColorAxle(i));
         axle[i] = b2world->CreateBody(&bodyDef);
         b2PolygonShape polygonShape;
         polygonShape.SetAsBox(0.2, 0.05, b2Vec2(x - 0.3*qCos(axleAngle),
-                              y - 0.3*qSin(axleAngle)), axleAngle);
+                            y - 0.3*qSin(axleAngle)), axleAngle);
         fixtureDef.shape = &polygonShape;
         fixtureDef.density = 20;
         createFixture(&fixtureDef, axle[i], algorithm->getColorAxle(i));
         prismaticJointDef.Initialize(carBody, axle[i],
-                                     axle[i]->GetWorldCenter(),
-                                     b2Vec2(qCos(axleAngle), qSin(axleAngle)));
+                                    axle[i]->GetWorldCenter(),
+                                    b2Vec2(qCos(axleAngle), qSin(axleAngle)));
         spring[i] = (b2PrismaticJoint *)
                 b2world->CreateJoint(&prismaticJointDef);
         b2CircleShape circleShape;
@@ -271,8 +271,8 @@ void Car::createWheels(b2BodyDef &bodyDef) {
         wheelFixtureDef.filter.groupIndex = -1;
         b2BodyDef wheelBodyDef;
         wheelBodyDef.position.Set(carBody->GetPosition().x + x -
-                                  qCos(axleAngle)/2, carBody->GetPosition().y +
-                                  y - qSin(axleAngle)/2);
+                                qCos(axleAngle)/2, carBody->GetPosition().y +
+                                y - qSin(axleAngle)/2);
         wheelBodyDef.allowSleep = false;
         wheelBodyDef.type = b2_dynamicBody;
         b2Body *bodyWheel = b2world->CreateBody(&wheelBodyDef);
@@ -298,4 +298,3 @@ void Car::init(b2BodyDef &bodyDef) {
     itteration = 0;
     slow = 0;
 }
-

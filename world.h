@@ -18,7 +18,7 @@ public:
     ~World();
 
     void addSparksList(const int impulses, const b2Vec2 pos,
-                       const QColor *color);
+                        const QColor *color);
     GeneticAlgorithm *getAlgorithm();
     Car *getCar();
     b2Vec2 getCenter();

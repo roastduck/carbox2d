@@ -39,7 +39,7 @@ private:
     void drawGrid();
     void drawParents();
     void drawPolygon(const b2Vec2* vertices, int32 vertexCount,
-                     const QColor &color);
+                    const QColor &color);
     void drawSparks();
     void drawTable();
     void drawText();
@@ -53,7 +53,7 @@ private:
     void prepareTableBoard();
     void resizeGL(const int nWidth, const int nHeight);
     void setBounds(const float nLeft, const float nRight, const float nBottom,
-                   const float nTop);
+                    const float nTop);
     void updateGraph();
 };
 

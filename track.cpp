@@ -51,7 +51,7 @@ void Track::generate() {
         float half_dy = track_length*qSin(angle);
         float y = prevY + half_dy;
         polygonShape.SetAsBox(track_length, TRACK_THICK,
-                              b2Vec2(x, y), angle);
+                            b2Vec2(x, y), angle);
         b2Fixture *f = trackBody->CreateFixture(&fixtureDef);
         f->SetUserData(new QColor(0, 0, 0));
         prevX = x + half_dx;

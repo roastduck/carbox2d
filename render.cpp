@@ -91,7 +91,7 @@ void Render::drawCar() {
 }
 
 void Render::drawCircle(const b2Vec2& center, float32 radius,
-                         const float32 angle, const QColor &color) {
+                        const float32 angle, const QColor &color) {
     const float32 k_segments = 32.0f;
     const float32 k_increment = 2.0f * b2_pi / k_segments;
     float32 theta = 0.0f;
@@ -133,15 +133,15 @@ void Render::drawGrid() {
             glColor3f(0.8,0.8,0.8);
         glVertex2f(getLeftBound(), y);
         glVertex2f(getRightBound(), y);
-     }
+    }
     for (int x = getLeftBound(); x <= getRightBound(); x++) {
-       if (x % 100 == 0)
+        if (x % 100 == 0)
             glColor3f(1,0,0.5);
         else
             glColor3f(0.8,0.8,0.8);
         glVertex2f(x, getBottomBound());
         glVertex2f(x, getTopBound());
-     }
+    }
     glEnd();
     glEnable(GL_LINE_SMOOTH);
 }
@@ -194,9 +194,9 @@ void Render::drawParents() {
         float offset = world->getAlgorithm()->getCarParentCallListNumber(1)?
                     0.0f: 10.f;
         float panel[8] = {right - 20.5f + offset, bottom + 10.5f,
-                          right - 20.5f + offset, bottom + 0.5f,
-                          right - 0.5f, bottom + 0.5f,
-                          right - 0.5f, bottom + 10.5f};
+                        right - 20.5f + offset, bottom + 0.5f,
+                        right - 0.5f, bottom + 0.5f,
+                        right - 0.5f, bottom + 10.5f};
         qglColor(QColor(255, 255, 200, 96));
         glVertexPointer(2, GL_FLOAT, 0, panel);
         glEnableClientState(GL_VERTEX_ARRAY);
@@ -216,7 +216,7 @@ void Render::drawParents() {
 }
 
 void Render::drawPolygon(const b2Vec2* vertices, int32 vertexCount,
-                 const QColor &color) {
+                const QColor &color) {
     QColor transparent = color;
     transparent.setAlpha(qMin(127, color.alpha()));
     if (!transparent.alpha())
@@ -298,7 +298,7 @@ void Render::drawText() {
     qglColor(Qt::red);
     str = tr("Score: %1").arg(QString::number(car->getMaxPossition(), '0', 1));
     renderText(this->width()/2 - fmScore.width(str)/2, height()/6*5, str,
-               font);
+                font);
     font.setPixelSize(14);
     QFontMetrics fm(font);
     int ss = 5*60 - car->getTime();
@@ -422,10 +422,10 @@ void Render::resizeGL(const int nWidth, const int nHeight) {
     float aspectRatio = (float)width/height;
     if (width <= height) {
         setBounds(-viewRadius, viewRadius, -viewRadius/aspectRatio,
-                  viewRadius/aspectRatio);
-     } else {
+                viewRadius/aspectRatio);
+    } else {
         setBounds(-viewRadius*aspectRatio, viewRadius*aspectRatio,
-                  -viewRadius, viewRadius);
+                -viewRadius, viewRadius);
     }
     glOrtho(getLeftBound(), getRightBound(), getBottomBound(), getTopBound(),
             1.0, -1.0);
@@ -435,7 +435,7 @@ void Render::resizeGL(const int nWidth, const int nHeight) {
 }
 
 void Render::setBounds(const float nLeft, const float nRight,
-                       const float nBottom, const float nTop) {
+                        const float nBottom, const float nTop) {
     boundLeft = nLeft;
     boundRight = nRight;
     boundBottom = nBottom;

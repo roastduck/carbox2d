@@ -13,7 +13,7 @@ public:
     ~MainWindow();
 
 signals:
-    
+
 public slots:
 
 private:

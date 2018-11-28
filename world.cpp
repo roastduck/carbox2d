@@ -22,7 +22,7 @@ World::~World() {
 //public
 
 void World::addSparksList(const int impulses, const b2Vec2 pos,
-                          const QColor *color) {
+                        const QColor *color) {
     if (impulses > 32) {
         sparkStuct spark;
         spark.count = qMin(impulses/4, 32);
@@ -123,7 +123,7 @@ void World::updateSparks() {
                 continue;
             b2PolygonShape shape;
             shape.SetAsBox(float(qrand())/float(RAND_MAX)/30+0.02,
-                           float(qrand())/float(RAND_MAX)/30+0.02, b2Vec2(0,0), 0);
+                            float(qrand())/float(RAND_MAX)/30+0.02, b2Vec2(0,0), 0);
             b2FixtureDef fixtureDef;
             fixtureDef.shape = &shape;
             fixtureDef.filter.groupIndex = -1;

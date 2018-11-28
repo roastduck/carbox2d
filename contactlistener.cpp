@@ -38,7 +38,7 @@ void ContactListener::PostSolve(b2Contact* contact,
         if (maxImpulses < impulse->normalImpulses[i])
             maxImpulses = impulse->normalImpulses[i];
         world->addSparksList(maxImpulses, manifold->points[i],
-                             (QColor *)fixture->GetUserData());
+                            (QColor *)fixture->GetUserData());
     }
     motoFixture->GetMassData(massData);
     float strength = 50*massData->mass;

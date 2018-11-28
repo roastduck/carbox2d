@@ -41,7 +41,7 @@ private:
 
     void createCart();
     b2Fixture *createFixture(const b2FixtureDef* def, b2Body *body,
-                             const QColor color);
+                            const QColor color);
     void createWheels(b2BodyDef &bodyDef);
     void init(b2BodyDef &bodyDef);
 

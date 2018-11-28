@@ -57,12 +57,12 @@ private:
     void copyChromes();
     void createCache();
     void crossover(const int parentA, const int parentB, const int offsprinA,
-                   const int offspringB);
+                    const int offspringB);
     QColor getColor(const int index);
     int getRandomChrome(bool queue[], const int excluding = -1);
     void mutation();
     void setColors(const int parentA, const int offspringA, const int  parentB,
-                   const int offspringB, const int index);
+                    const int offspringB, const int index);
     void setParentCallLists(const int index, const int parentACL,
                             const int parentBCL);
 

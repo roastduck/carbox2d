@@ -191,7 +191,7 @@ void GeneticAlgorithm::setScoreAndTime(float score, float time) {
 //private
 
 bool GeneticAlgorithm::compareCar(const float scoreA, const float timeA,
-                                  const int scoreB, const float timeB) {
+                                const int scoreB, const float timeB) {
     if (scoreA > scoreB)
         return true;
     if (scoreB > scoreA)
@@ -242,7 +242,7 @@ void GeneticAlgorithm::createCache() {
 }
 
 void GeneticAlgorithm::crossover(const int parentA, const int parentB,
-                                 const int offspringA, const int offspringB) {
+                                const int offspringA, const int offspringB) {
     int bend0 = qrand()%CROMES_SIZE;
     int bend1 = qrand()%CROMES_SIZE;
     if (bend0 > bend1)
@@ -264,8 +264,8 @@ void GeneticAlgorithm::crossover(const int parentA, const int parentB,
 
 QColor GeneticAlgorithm::getColor(const int index) {
     return QColor(colors[currentCar][index][RED],
-                  colors[currentCar][index][GREEN],
-                  colors[currentCar][index][BLUE]);
+                colors[currentCar][index][GREEN],
+                colors[currentCar][index][BLUE]);
 }
 
 int GeneticAlgorithm::getRandomChrome(bool queue[], const int excluding) {
@@ -293,8 +293,8 @@ void GeneticAlgorithm::mutation() {
 }
 
 void GeneticAlgorithm::setColors(const int parentA, const int offspringA,
-                                 const int parentB, const int offspringB,
-                                 const int index) {
+                                const int parentB, const int offspringB,
+                                const int index) {
     int i = -1;
     if (index < 16) {
         if (index%2 == 0)
@@ -312,7 +312,7 @@ void GeneticAlgorithm::setColors(const int parentA, const int offspringA,
 }
 
 void GeneticAlgorithm::setParentCallLists(const int index, const int parentACL,
-                                          const int parentBCL) {
+                                        const int parentBCL) {
     parentsCallLists[index][0] = parentACL;
     parentsCallLists[index][1] = parentBCL;
 }

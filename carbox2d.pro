@@ -6,9 +6,9 @@ HEADERS       = \
     mainwindow.h \
     contactlistener.h \
     car.h \
-    geneticalgorithm.h \  
+    geneticalgorithm.h \
     render.h
-    
+
 SOURCES       = \
                 main.cpp \
     world.cpp \
@@ -23,4 +23,3 @@ LIBS += -L$$PWD/lib/ -lBox2D
 
 INCLUDEPATH += $$PWD/Box2D
 DEPENDPATH += $$PWD/Box2D
-
