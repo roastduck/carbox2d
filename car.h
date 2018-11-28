@@ -33,11 +33,11 @@ signals:
     void stoped();
 
 private:
-    static const float MASS_MULT = 1.5;
-    static const int MAX_ITTERATION = 5*60*60;
-    static const float TRACK_LENGTH = 1500.0f;
-    static const int NO_WHEELS = -1;
-    static const int BROKEN_WHEELS = -2;
+    static constexpr float MASS_MULT = 1.5;
+    static constexpr int MAX_ITTERATION = 5*60*60;
+    static constexpr float TRACK_LENGTH = 1500.0f;
+    static constexpr int NO_WHEELS = -1;
+    static constexpr int BROKEN_WHEELS = -2;
 
     void createCart();
     b2Fixture *createFixture(const b2FixtureDef* def, b2Body *body,

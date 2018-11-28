@@ -13,8 +13,8 @@ public:
 private:
     void generate();
 
-    const static int LENGTH = 1000;
-    const static float TRACK_THICK = 0.15;
+    constexpr static int LENGTH = 1000;
+    constexpr static float TRACK_THICK = 0.15;
 
 
     b2World *b2world;

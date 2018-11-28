@@ -37,19 +37,19 @@ signals:
     void freeCallListNumber(unsigned int);
 
 private:
-    static const int CROMES_SIZE = 40;
-    static const float MIN_CART = 0.1;
-    static const float MAX_CART = 3;
-    static const float MIN_WHEEL = 0.1;
-    static const float MAX_WHEEL = 1.5;
-    static const float MIN_ANGLE = 0.08;
-    static const int POP_SIZE = 32;
-    static const float WHEEL_PROB0 = 0.5; //(0:1]
-    static const int START_WHEELS_GEN = 16;
-    static const int MAX_MUTATION_RATE = 5.0;
-    static const int RED = 0;
-    static const int GREEN = 1;
-    static const int BLUE = 2;
+    static constexpr int CROMES_SIZE = 40;
+    static constexpr float MIN_CART = 0.1;
+    static constexpr float MAX_CART = 3;
+    static constexpr float MIN_WHEEL = 0.1;
+    static constexpr float MAX_WHEEL = 1.5;
+    static constexpr float MIN_ANGLE = 0.08;
+    static constexpr int POP_SIZE = 32;
+    static constexpr float WHEEL_PROB0 = 0.5; //(0:1]
+    static constexpr int START_WHEELS_GEN = 16;
+    static constexpr int MAX_MUTATION_RATE = 5.0;
+    static constexpr int RED = 0;
+    static constexpr int GREEN = 1;
+    static constexpr int BLUE = 2;
 
     bool compareCar(const float scoreA, const float timeA, const int scoreB,
                     const float timeB);

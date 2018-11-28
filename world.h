@@ -42,10 +42,10 @@ private:
         const QColor *color;
     };
 
-    static const float GRAVITY = -15.0;
-    static const int ITERATIONS = 30;
-    static const float TIME_STEP = 1.0/60.0;
-    static const int MAX_SPARK_COUNT = 512;
+    static constexpr float GRAVITY = -15.0;
+    static constexpr int ITERATIONS = 30;
+    static constexpr float TIME_STEP = 1.0/60.0;
+    static constexpr int MAX_SPARK_COUNT = 512;
 
     void destroy();
     void destroySpark(const int index);
