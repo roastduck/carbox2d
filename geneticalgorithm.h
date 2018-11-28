@@ -29,7 +29,6 @@ public:
     float getWheelRadius(const int index);
     void init();
     void nextCar();
-    void nextGeneration();
     void setCarCallList(const unsigned int callListNumber);
     void setScoreAndTime(float score, float time);
 
@@ -51,12 +50,14 @@ private:
     static constexpr int GREEN = 1;
     static constexpr int BLUE = 2;
 
+    void nextGeneration();
+
     bool compareCar(const float scoreA, const float timeA, const int scoreB,
                     const float timeB);
     void copyChrome(const int parent, const int offspring);
     void copyChromes();
     void createCache();
-    void crossover(const int parentA, const int parentB, const int offsprinA,
+    void crossover(const int parentA, const int parentB, const int offspringA,
                     const int offspringB);
     QColor getColor(const int index);
     int getRandomChrome(bool queue[], const int excluding = -1);
