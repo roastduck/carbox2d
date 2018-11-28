@@ -19,6 +19,8 @@ SOURCES       = \
     geneticalgorithm.cpp \
     render.cpp
 
+CONFIG += c++14
+
 LIBS += -L$$PWD/lib/ -lBox2D
 
 INCLUDEPATH += $$PWD/Box2D
