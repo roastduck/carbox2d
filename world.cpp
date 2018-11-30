@@ -2,10 +2,13 @@
 #include <QTime>
 #include <QDebug>
 #include "world.h"
+#include "geneticalgorithm.h"
+#include "externalalgorithm.h"
 
 World::World() {
     qsrand(QDateTime::currentDateTime().toTime_t());
-    algorithm = new GeneticAlgorithm();
+    //algorithm = new GeneticAlgorithm();
+    algorithm = new ExternalAlgorithm();
     connect(algorithm, SIGNAL(freeCallListNumber(uint)),
             SIGNAL(freeCallListNumber(uint)));
     algorithm->nextCar();

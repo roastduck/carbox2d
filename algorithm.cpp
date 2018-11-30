@@ -56,7 +56,9 @@ void Algorithm::nextCar() {
                     oldColors[i][j][channel] = colors[i][j][channel];
             }
         }
+        generationNum++;
         nextGeneration();
+        currentCar = 0;
     }
 }
 

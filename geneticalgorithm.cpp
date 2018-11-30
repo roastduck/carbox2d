@@ -62,8 +62,6 @@ void GeneticAlgorithm::nextGeneration() {
         crossover(parentA, parentB, i*2, i*2 + 1);
     }
     mutation();
-    generationNum++;
-    currentCar = 0;
 }
 
 bool GeneticAlgorithm::compareCar(const float scoreA, const float timeA,

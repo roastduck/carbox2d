@@ -6,7 +6,7 @@
 #include <Box2D/Box2D.h>
 #include "car.h"
 #include "contactlistener.h"
-#include "geneticalgorithm.h"
+#include "algorithm.h"
 #include "track.h"
 
 class ContactListener;

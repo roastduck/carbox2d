@@ -7,6 +7,7 @@ HEADERS = \
     contactlistener.h \
     car.h \
     algorithm.h \
+    externalalgorithm.h \
     geneticalgorithm.h \
     render.h
 
@@ -18,6 +19,7 @@ SOURCES = \
     contactlistener.cpp \
     car.cpp \
     algorithm.cpp \
+    externalalgorithm.cpp \
     geneticalgorithm.cpp \
     render.cpp
 
