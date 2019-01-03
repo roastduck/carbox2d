@@ -1,5 +1,7 @@
+import os
 import sys
 import random
+import pickle
 import itertools
 import tensorflow as tf
 import numpy as np
@@ -7,7 +9,7 @@ import numpy as np
 sys.stderr.write("Python script is running...\n");
 
 CHROMOS_SIZE = 40
-LEARNING_RATE = 5e-4
+LEARNING_RATE = 1e-4
 BATCH_SIZE = 32
 
 def simulate(chromos):
@@ -35,6 +37,12 @@ def net(chrIn, reuse):
     x = tf.reshape(x, (-1,))
     return x
 
+def shuffle(sample, label):
+    assert len(sample) == len(label)
+    arr = list(zip(sample, label))
+    random.shuffle(arr)
+    return zip(*arr)
+
 trainIn = tf.placeholder(tf.float32, (None, CHROMOS_SIZE), "trainIn")
 trainOut = net(trainIn, reuse=False)
 label = tf.placeholder(tf.float32, (None,), "label")
@@ -50,7 +58,17 @@ improve = tf.nn.l2_normalize(dIn) * 0.01
 chromos = [randomChromos() for i in range(BATCH_SIZE)]
 
 sess = tf.Session()
-sess.run(tf.global_variables_initializer())
+saver = tf.train.Saver(max_to_keep=1)
+if os.environ['CARBOX2D_RESTORE'] == 'NO':
+    sys.stderr.write("Creating clean variables")
+    sess.run(tf.global_variables_initializer())
+    allChromos = []
+    allScores = []
+else:
+    sys.stderr.write("Restoring checkpoint")
+    saver.restore(sess, tf.train.latest_checkpoint('./checkpoint'))
+    with open('./checkpoint/extra.data', 'rb') as f:
+        allChromos, allScores = pickle.load(f)
 
 for generation in itertools.count():
     # Perceive
@@ -59,10 +77,21 @@ for generation in itertools.count():
         score, time = simulate(c)
         sys.stderr.write("> score = %f, time = %f\n"%(score, time))
         scores.append(score)
-    curLoss, _ = sess.run((loss, opt), {trainIn: chromos, label: scores})
+    scores = np.array(scores, dtype=np.float32)
     sys.stderr.write("Generation #%d: avg score = %f\n"%(generation, np.mean(scores)))
     sys.stderr.write("Generation #%d: max score = %f\n"%(generation, np.max(scores)))
-    sys.stderr.write("Generation #%d: loss = %f\n"%(generation, np.max(curLoss)))
+    allChromos, allScores = shuffle(list(allChromos) + list(chromos), list(allScores) + list(scores / 1000))
+    avgLoss = 0.
+    for i in range(len(allChromos) // BATCH_SIZE):
+        chromosIn = allChromos[i * BATCH_SIZE : (i + 1) * BATCH_SIZE]
+        scoresIn = allScores[i * BATCH_SIZE : (i + 1) * BATCH_SIZE]
+        curLoss, _ = sess.run((loss, opt), {trainIn: chromosIn, label: scoresIn})
+        avgLoss += curLoss
+    avgLoss /= len(allChromos) // BATCH_SIZE
+    sys.stderr.write("Generation #%d: loss = %f\n"%(generation, np.max(avgLoss)))
+    with open('./checkpoint/extra.data', 'wb') as f:
+        pickle.dump((allChromos, allScores), f)
+    saver.save(sess, './checkpoint/params')
 
     # Action
     median = np.median(scores)
